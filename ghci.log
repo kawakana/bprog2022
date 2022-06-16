@@ -221,3 +221,177 @@ Ok, one module loaded.
 2022-06-09 16:15:00.2624828
 >>> :quit
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/kana/bprog2022/.ghci
+2022-06-16 15:02:05.7686262
+>>> take 3 [3,1,4,1,5]
+[3,1,4]
+2022-06-16 15:04:23.1806909
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+Ok, no modules loaded.
+2022-06-16 15:10:49.7838185
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-16 15:10:49.823746
+>>> double
+
+<interactive>:4:1: error:
+    • No instance for (Show (Int -> Int)) arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+2022-06-16 15:12:56.3044829
+>>> take (double 2) [1,2,3,4,5]
+[1,2,3,4]
+2022-06-16 15:15:19.6138379
+>>> [1 ..10]
+[1,2,3,4,5,6,7,8,9,10]
+2022-06-16 15:20:42.2897737
+>>> :e
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-16 15:21:05.0723271
+>>> factorial 3
+6
+2022-06-16 15:22:35.6531735
+>>> factorial 4
+24
+2022-06-16 15:25:01.9224215
+>>> :r]
+unknown command ':r]'
+use :? for help.
+2022-06-16 15:38:25.7989296
+>>> :e
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs 'div' length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:13:21: error:
+    • Syntax error on 'div'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'div'
+   |
+13 | average xs = sum xs 'div' length xs
+   |                     ^^^^^
+Failed, no modules loaded.
+2022-06-16 15:38:50.7097228
+>>> :e
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div`` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:13:26: error: parse error on input ‘`’
+   |
+13 | average xs = sum xs `div`` length xs
+   |                          ^
+Failed, no modules loaded.
+2022-06-16 15:39:35.6588949
+>>> :e
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-16 15:39:46.5402873
+>>> average [1,2,3,4,5]
+3
+2022-06-16 15:40:24.9456401
+>>> :t take 3 [1,2,3,4,5]
+take 3 [1,2,3,4,5] :: Num a => [a]
+2022-06-16 15:49:53.9786574
+>>> 
+2022-06-16 16:06:24.0972911
+>>>  init [1 .. 5]
+[1,2,3,4]
+2022-06-16 16:07:17.6699319
+>>> :e
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-16 16:14:28.8385264
+>>> myinit [1 .. 5]
+[1,2,3,4]
+2022-06-16 16:14:55.3041717
+>>> myinit []
+*** Exception: src/First.hs:(19,1)-(20,29): Non-exhaustive patterns in function myinit
+
+2022-06-16 16:15:09.9385205
+>>> :q
+Leaving GHCi.
