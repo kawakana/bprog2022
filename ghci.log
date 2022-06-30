@@ -395,3 +395,253 @@ Ok, one module loaded.
 2022-06-16 16:15:09.9385205
 >>> :q
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/kana/bprog2022/.ghci
+2022-06-23 14:54:55.876279
+>>> :i
+syntax: ':i <thing-you-want-info-about>'
+2022-06-23 14:55:50.1349849
+>>> :i Num
+type Num :: * -> Constraint
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+  	-- Defined in ‘GHC.Num’
+instance Num NominalDiffTime
+  -- Defined in ‘time-1.9.3:Data.Time.Clock.Internal.NominalDiffTime’
+instance Num DiffTime
+  -- Defined in ‘time-1.9.3:Data.Time.Clock.Internal.DiffTime’
+instance Num Word -- Defined in ‘GHC.Num’
+instance Num Integer -- Defined in ‘GHC.Num’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Num Float -- Defined in ‘GHC.Float’
+instance Num Double -- Defined in ‘GHC.Float’
+2022-06-23 14:56:41.7693637
+>>> 
+2022-06-23 15:00:59.9366279
+>>> 
+2022-06-23 15:01:29.2290126
+>>> 1==2
+False
+2022-06-23 15:06:16.1577575
+>>> 1 < 2
+True
+2022-06-23 15:06:26.117171
+>>> 1 < 1
+False
+2022-06-23 15:06:34.857573
+>>> 1 <= 2
+True
+2022-06-23 15:06:51.191048
+>>> 1 >= 2
+False
+2022-06-23 15:07:12.2947675
+>>> 'a' < 'b'
+True
+2022-06-23 15:11:29.5458187
+>>> 'a' < 'B'
+False
+2022-06-23 15:11:49.6878077
+>>> '' < 'a'
+
+<interactive>:12:1: error:
+    Parser error on `''`
+    Character literals may not be empty
+2022-06-23 15:12:27.7890766
+>>> 'ab' < 'b'
+
+<interactive>:13:1: error:
+    • Syntax error on 'ab'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'ab'
+2022-06-23 15:12:58.434537
+>>> 1 /= 2
+True
+2022-06-23 15:15:57.2947928
+>>> 1 /= 1
+False
+2022-06-23 15:16:14.4588871
+>>> :info abs
+type Num :: * -> Constraint
+class Num a where
+  ...
+  abs :: a -> a
+  ...
+  	-- Defined in ‘GHC.Num’
+2022-06-23 15:30:16.8440385
+>>> abs
+
+<interactive>:17:1: error:
+    • No instance for (Show (Integer -> Integer))
+        arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+2022-06-23 15:30:49.9556637
+>>> abs (-234)
+234
+2022-06-23 15:34:38.6735603
+>>> GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/kana/bprog2022/.ghci
+2022-06-30 14:56:41.3886903
+>>> [ x ^ 2 | x <- [1 .. 5] ]
+[1,4,9,16,25]
+2022-06-30 15:02:29.5549143
+>>> map (^2) [1..5]
+[1,4,9,16,25]
+2022-06-30 15:05:06.0674189
+>>> [ x * 2 | x <- [1..5] ]
+[2,4,6,8,10]
+2022-06-30 15:12:52.8322523
+>>> [ x 'div' 2 | x <- [1 .. 5] ]
+
+<interactive>:4:5: error:
+    • Syntax error on 'div'
+      Perhaps you intended to use TemplateHaskell or TemplateHaskellQuotes
+    • In the Template Haskell quotation 'div'
+2022-06-30 15:13:54.4961072
+>>> [ x `div` 2 | x <- [1 .. 5] ]
+[0,1,1,2,2]
+2022-06-30 15:14:29.6349217
+>>> [ x `divMod` 2 | x <- [1 .. 5] ]
+[(0,1),(1,0),(1,1),(2,0),(2,1)]
+2022-06-30 15:15:33.9361598
+>>> [ (x,y) | x <- "abc", y <- [4.5] ]
+[('a',4.5),('b',4.5),('c',4.5)]
+2022-06-30 15:20:56.7810376
+>>> [ (x,y) | y <- [4, 5], x <- "abc"] ]
+
+<interactive>:8:36: error: parse error on input ‘]’
+2022-06-30 15:22:55.1839033
+>>> [ (x,y) | y <- [4, 5], x <- "abc"]
+[('a',4),('b',4),('c',4),('a',5),('b',5),('c',5)]
+2022-06-30 15:23:06.1280376
+>>> 
+2022-06-30 15:23:56.0118623
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] -> [a]
+  23  myconcat css = [ x | xs <- xss, x <- xs ]
+Ok, no modules loaded.
+2022-06-30 15:30:06.505827
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+
+src/First.hs:23:28: error:
+    • Variable not in scope: xss :: [[a]]
+    • Perhaps you meant ‘css’ (line 23)
+   |
+23 | myconcat css = [ x | xs <- xss, x <- xs ]
+   |                            ^^^
+Failed, no modules loaded.
+2022-06-30 15:30:06.5412759
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] -> [a]
+  23  myconcat xss = [ x | xs <- xss, x <- xs ]
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:32:43.263832
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:32:43.3580254
+>>> [ 1 | _ <- [1 .. 5] ]
+[1,1,1,1,1]
+2022-06-30 15:47:51.3727436
+>>> :e src/First.hs
+   1  module First where
+   2  
+   3  double :: Int -> Int
+   4  double x = x + x
+   5  
+   6  quadruple :: Int -> Int
+   7  quadruple x = double (double x)
+   8  
+   9  factorial :: Integer -> Integer
+  10  factorial n = product [1 .. n]
+  11  
+  12  average :: [Int] -> Int
+  13  average xs = sum xs `div` length xs
+  14  
+  15  ave :: [Int] -> Int
+  16  ave xs = div (sum xs) (length xs)
+  17  
+  18  myinit :: [a] -> [a]
+  19  myinit (x:[]) = []
+  20  myinit (x:xs) = x : (init xs)
+  21  
+  22  myconcat :: [[a]] -> [a]
+  23  myconcat xss = [ x | xs <- xss, x <- xs ]
+  24  
+  25  mylength :: [a] -> Int
+  26  mylength xs = sum [ 1 | _ <- xs ]
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:50:39.4414387
+>>> :l src/First.hs
+[1 of 1] Compiling First            ( src/First.hs, interpreted )
+Ok, one module loaded.
+2022-06-30 15:50:39.539943
+>>> mylength ['a' .. 'z']
+26
+2022-06-30 15:51:26.9628005
+>>> ['a' .. 'z']
+"abcdefghijklmnopqrstuvwxyz"
+2022-06-30 15:52:24.2522032
+>>> putStrLn it
+abcdefghijklmnopqrstuvwxyz
+2022-06-30 15:52:59.2826491
+>>> ['あ'.. 'ん']
+"\12354\12355\12356\12357\12358\12359\12360\12361\12362\12363\12364\12365\12366\12367\12368\12369\12370\12371\12372\12373\12374\12375\12376\12377\12378\12379\12380\12381\12382\12383\12384\12385\12386\12387\12388\12389\12390\12391\12392\12393\12394\12395\12396\12397\12398\12399\12400\12401\12402\12403\12404\12405\12406\12407\12408\12409\12410\12411\12412\12413\12414\12415\12416\12417\12418\12419\12420\12421\12422\12423\12424\12425\12426\12427\12428\12429\12430\12431\12432\12433\12434\12435"
+2022-06-30 15:54:04.3651598
+>>> putStrLn it
+あぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろゎわゐゑをん
+2022-06-30 15:55:11.1758694
+>>> :q
+Leaving GHCi.
