@@ -645,3 +645,29 @@ abcdefghijklmnopqrstuvwxyz
 2022-06-30 15:55:11.1758694
 >>> :q
 Leaving GHCi.
+GHCi, version 9.0.2: https://www.haskell.org/ghc/  :? for help
+Loaded GHCi configuration from /home/kana/bprog2022/.ghci
+2022-07-07 16:05:03.556199
+>>> :e src/Caesar.hs
+   1  module Caesar where
+   2  
+   3  import Data.Char
+Ok, no modules loaded.
+2022-07-07 16:05:36.2829576
+>>> :l src/Caesar.hs
+[1 of 1] Compiling Caesar           ( src/Caesar.hs, interpreted )
+Ok, one module loaded.
+2022-07-07 16:05:36.3281811
+>>> ord `A`
+
+<interactive>:3:8: error:
+    parse error (possibly incorrect indentation or mismatched brackets)
+2022-07-07 16:05:53.0211777
+>>> ord 'A'
+65
+2022-07-07 16:06:51.8611679
+>>> ord 'a'
+97
+2022-07-07 16:07:13.9331811
+>>> :q
+Leaving GHCi.
